@@ -88,7 +88,8 @@ export default function MemeGenerator({ onMemeGenerated, todayCount, setTodayCou
 
       const imageUrl = await generateMemeImage(trimmed)
 
-      const tier = getCurrentTier(state.dailyCount + 1)
+      const newCount = state.dailyCount + 1
+      const tier = getCurrentTier(newCount)
       const allocation = {
         holderPool: Math.floor(CONFIG.TOKENS_PER_MEME * CONFIG.HOLDER_POOL_RATIO),
         creatorReward: Math.floor(CONFIG.TOKENS_PER_MEME * CONFIG.CREATOR_REWARD_RATIO),
@@ -113,7 +114,6 @@ export default function MemeGenerator({ onMemeGenerated, todayCount, setTodayCou
         tier: tier.name,
       })
 
-      const newCount = state.dailyCount + 1
       const newState: UserState = {
         ...state,
         dailyCount: newCount,
